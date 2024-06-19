@@ -40,22 +40,19 @@ namespace PageObjectLib.Elements
 
         public string GetText() => Element.Text;
 
-        public static void AcceptAlert()
-        {
-            var alert = Driver.GetDriver().SwitchTo().Alert();
-            alert.Accept();
-        }
+        public static void AcceptAlert() => GetAlert().Accept();
 
-        public static string GetAlertText()
-        {
-            var alert = Driver.GetDriver().SwitchTo().Alert();
-            return alert.Text;
-        }
-        public static bool IsalertShown()
+        public static string GetAlertText() => GetAlert().Text;
+
+        public static void DismissAlert() => GetAlert().Dismiss();
+
+        public static IAlert GetAlert() => Driver.GetDriver().SwitchTo().Alert();
+
+        public static bool IsAlertShown()
         {
             try
             {
-                Driver.GetDriver().SwitchTo().Alert();
+                GetAlert();
             }
             catch (Exception ex)
             {
