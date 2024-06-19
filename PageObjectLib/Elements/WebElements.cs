@@ -27,19 +27,19 @@ namespace PageObjectLib.Elements
 
         public void SendValue(string value)
         {
-            ScrollToElementByJS();
+            ScrollToElement();
             Element.SendKeys(value);
         }
 
         public void Click()
         {
-            ScrollToElementByJS();
+            ScrollToElement();
             Element.Click();
         }
 
         public void ScrollToElement() => _actions.MoveToElement(Element);
 
-        public void ScrollToElementByJS() => ((IJavaScriptExecutor)_driver).ExecuteScript("argument[0].scrollIntoView(true)", Element);
+        //public void ScrollToElementByJS() => ((IJavaScriptExecutor)_driver).ExecuteScript("argument[0].scrollIntoView(true)", Element);
 
         public string GetAttribute(string atr) => Element.GetAttribute(atr);
 
