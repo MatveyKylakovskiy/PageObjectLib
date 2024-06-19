@@ -10,10 +10,11 @@ namespace PageObjectLib.Factories
         private static IWebDriver? _driver;
         private static WebDriverWait? _wait;
         private static ChromeOptions? _chromeOptions;
-        private static Actions? _actions = new Actions(_driver);
+        private static Actions? _actions;
 
         public static WebDriverWait GetWait() => _wait ??= new(_driver, TimeSpan.FromSeconds(60));
         public static IWebDriver GetDriver() => _driver ??= new ChromeDriver(GetOptions());
+        public static Actions GetActions() => _actions ??= new Actions(_driver);
         public static ChromeOptions GetOptions()
         {
             if (_chromeOptions == null)

@@ -9,8 +9,8 @@ namespace PageObjectLib.Elements
     {
         private static readonly IWebDriver _driver = Driver.GetDriver();
         private static readonly WebDriverWait _wait = Driver.GetWait();
+        private static Actions _actions = Driver.GetActions();
         private readonly By? _locator;
-        private static Actions _actions = new Actions(_driver);
 
         public WebElement(By locator) => _locator = locator;
 
