@@ -51,6 +51,11 @@ namespace PageObjectLib.Elements
             alert.Accept();
         }
 
+        public static string GetAlertText()
+        {
+            var alert = _driver.SwitchTo().Alert();
+            return alert.Text;
+        }
         public static bool IsalertShown()
         {
             try
