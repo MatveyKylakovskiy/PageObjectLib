@@ -7,8 +7,8 @@ namespace PageObjectLib.Elements
 {
     public class WebElements
     {
-        private static readonly IWebDriver _driver = Driver.GetDriver();
-        private static readonly WebDriverWait _wait = Driver.GetWait();
+        private static IWebDriver _driver = Driver.GetDriver();
+        private static WebDriverWait _wait = Driver.GetWait();
         private static Actions _actions = Driver.GetActions();
         private readonly By? _locator;
 
@@ -75,5 +75,12 @@ namespace PageObjectLib.Elements
         }
 
         public void FrameExit() => _driver.SwitchTo().DefaultContent();
+
+        public static void QuitElements()
+        {
+            _actions = null;
+            _driver = null;
+            _wait = null;
+        }
     }
 }
