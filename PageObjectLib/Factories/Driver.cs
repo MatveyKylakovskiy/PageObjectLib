@@ -13,8 +13,13 @@ namespace PageObjectLib.Factories
         private static Actions? _actions;
 
         public static WebDriverWait GetWait() => _wait ??= new(_driver, TimeSpan.FromSeconds(60));
+
         public static IWebDriver GetDriver() => _driver ??= new ChromeDriver(GetOptions());
+
         public static Actions GetActions() => _actions ??= new Actions(_driver);
+
+        public static void GoUrl(string url) => GetDriver().Navigate().GoToUrl(url);
+
         public static ChromeOptions GetOptions()
         {
             if (_chromeOptions == null)
@@ -24,6 +29,7 @@ namespace PageObjectLib.Factories
             }
             return _chromeOptions;
         }
+
         public static void QuitDriver()
         {
             _driver?.Quit();
@@ -31,6 +37,7 @@ namespace PageObjectLib.Factories
             _wait = null;
             _actions = null;
         }
+
         public static void DisposeDriver() => _driver?.Dispose();
     }
 }

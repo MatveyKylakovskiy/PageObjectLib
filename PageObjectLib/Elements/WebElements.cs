@@ -5,14 +5,14 @@ using PageObjectLib.Factories;
 
 namespace PageObjectLib.Elements
 {
-    public class WebElement
+    public class WebElements
     {
         private static readonly IWebDriver _driver = Driver.GetDriver();
         private static readonly WebDriverWait _wait = Driver.GetWait();
         private static Actions _actions = Driver.GetActions();
         private readonly By? _locator;
 
-        public WebElement(By locator) => _locator = locator;
+        public WebElements(By locator) => _locator = locator;
 
         public IWebElement Element
         {
