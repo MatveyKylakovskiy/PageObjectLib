@@ -1,15 +1,10 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
-using OpenQA.Selenium.Support.UI;
 using PageObjectLib.Factories;
 
 namespace PageObjectLib.Elements
 {
     public class WebElements
     {
-        private static IWebDriver _driver = Driver.GetDriver();
-        private static WebDriverWait _wait = Driver.GetWait();
-        private static Actions _actions = Driver.GetActions();
         private readonly By? _locator;
 
         public WebElements(By locator) => _locator = locator;
@@ -19,11 +14,11 @@ namespace PageObjectLib.Elements
             get
             {
                 WaitWebElementPresent();
-                return _driver.FindElement(_locator);
+                return Driver.GetDriver().FindElement(_locator);
             }
         }
 
-        public void WaitWebElementPresent() => _wait.Until(drv => drv.FindElements(_locator).Count() > 0);
+        public void WaitWebElementPresent() => Driver.GetWait().Until(drv => drv.FindElements(_locator).Count() > 0);
 
         public void SendValue(string value)
         {
@@ -37,7 +32,7 @@ namespace PageObjectLib.Elements
             Element.Click();
         }
 
-        public void ScrollToElement() => _actions.MoveToElement(Element);
+        public void ScrollToElement() => Driver.GetActions().MoveToElement(Element);
 
         //public void ScrollToElementByJS() => ((IJavaScriptExecutor)_driver).ExecuteScript("argument[0].scrollIntoView(true)", Element);
 
@@ -47,20 +42,20 @@ namespace PageObjectLib.Elements
 
         public static void AcceptAlert()
         {
-            var alert = _driver.SwitchTo().Alert();
+            var alert = Driver.GetDriver().SwitchTo().Alert();
             alert.Accept();
         }
 
         public static string GetAlertText()
         {
-            var alert = _driver.SwitchTo().Alert();
+            var alert = Driver.GetDriver().SwitchTo().Alert();
             return alert.Text;
         }
         public static bool IsalertShown()
         {
             try
             {
-                _driver.SwitchTo().Alert();
+                Driver.GetDriver().SwitchTo().Alert();
             }
             catch (Exception ex)
             {
@@ -71,16 +66,10 @@ namespace PageObjectLib.Elements
 
         public void SwitchToFrame()
         {
-            _driver.SwitchTo().Frame(Element);
+            Driver.GetDriver().SwitchTo().Frame(Element);
         }
 
-        public void FrameExit() => _driver.SwitchTo().DefaultContent();
+        public void FrameExit() => Driver.GetDriver().SwitchTo().DefaultContent();
 
-        public static void QuitElements()
-        {
-            _actions = null;
-            _driver = null;
-            _wait = null;
-        }
     }
 }
