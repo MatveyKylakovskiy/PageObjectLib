@@ -14,6 +14,8 @@ namespace PageObjectLib.Factories
 
         public static WebDriverWait GetWait() => _wait ??= new(_driver, TimeSpan.FromSeconds(60));
 
+        public static WebDriverWait GetWaitByTime(TimeSpan time) => _wait ??= new(_driver, time);
+
         public static IWebDriver GetDriver() => _driver ??= new ChromeDriver(GetOptions());
 
         public static Actions GetActions() => _actions ??= new Actions(_driver);

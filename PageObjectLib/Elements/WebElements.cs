@@ -46,7 +46,11 @@ namespace PageObjectLib.Elements
 
         public static void DismissAlert() => GetAlert().Dismiss();
 
-        public static void SendTextToAlert(string text) => GetAlert().SendKeys(text);
+        public static void SendTextToAlert(string text)
+        {
+            var alert = Driver.GetDriver().SwitchTo().Alert();
+            alert.SendKeys(text);
+        }
 
         public static IAlert GetAlert() => Driver.GetDriver().SwitchTo().Alert();
 
