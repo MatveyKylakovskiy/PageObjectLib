@@ -32,9 +32,7 @@ namespace PageObjectLib.Elements
             Element.Click();
         }
 
-        public void ScrollToElement() => Driver.GetActions().MoveToElement(Element);
-
-        //public void ScrollToElementByJS() => ((IJavaScriptExecutor)_driver).ExecuteScript("argument[0].scrollIntoView(true)", Element);
+        public void ScrollToElement() => Driver.GetActions().MoveToElement(Element); 
 
         public string GetAttribute(string atr) => Element.GetAttribute(atr);
 

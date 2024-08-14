@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 
@@ -10,19 +11,36 @@ namespace PageObjectLib.Factories
         private static IWebDriver? _driver;
         private static WebDriverWait? _wait;
         private static ChromeOptions? _chromeOptions;
+        private static EdgeOptions? _edgeOptions;
         private static Actions? _actions;
 
         public static WebDriverWait GetWait() => _wait ??= new(_driver, TimeSpan.FromSeconds(60));
 
         public static WebDriverWait GetWaitByTime(TimeSpan time) => _wait ??= new(_driver, time);
+        public static IWebDriver GetDriver() => _driver;
+        public static IWebDriver CreateDriver(string driver)
+        {
+            switch (driver)
+            {
+                case "chrome":
+                    return _driver ??= new ChromeDriver(GetChromeOptions());
+                    break;
 
-        public static IWebDriver GetDriver() => _driver ??= new ChromeDriver(GetOptions());
+                case "edge":
+                    return _driver ??= new EdgeDriver(GetEdgeOptions());
+                    break;
+
+                default:
+                    return _driver ??= new ChromeDriver(GetChromeOptions());
+                    break;
+            };
+        }
 
         public static Actions GetActions() => _actions ??= new Actions(_driver);
 
-        public static void GoUrl(string url) => GetDriver().Navigate().GoToUrl(url);
+        public static void GoUrl(string url) => _driver?.Navigate().GoToUrl(url);
 
-        public static ChromeOptions GetOptions()
+        public static ChromeOptions GetChromeOptions()
         {
             if (_chromeOptions == null)
             {
@@ -30,6 +48,16 @@ namespace PageObjectLib.Factories
                 _chromeOptions.AddArgument("start-maximized");
             }
             return _chromeOptions;
+        }
+
+        public static EdgeOptions GetEdgeOptions()
+        {
+            if (_edgeOptions == null)
+            {
+                _edgeOptions = new EdgeOptions();
+                _edgeOptions.AddArgument("start-maximized");
+            }
+            return _edgeOptions;
         }
 
         public static void QuitDriver()
