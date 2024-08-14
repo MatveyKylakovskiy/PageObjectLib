@@ -18,20 +18,16 @@ namespace PageObjectLib.Factories
 
         public static WebDriverWait GetWaitByTime(TimeSpan time) => _wait ??= new(_driver, time);
         public static IWebDriver GetDriver() => _driver;
-        public static IWebDriver CreateDriver(string driver)
+        public static void CreateDriver(string driver)
         {
             switch (driver)
             {
                 case "chrome":
-                    return _driver ??= new ChromeDriver(GetChromeOptions());
+                    _driver ??= new ChromeDriver(GetChromeOptions());
                     break;
 
                 case "edge":
-                    return _driver ??= new EdgeDriver(GetEdgeOptions());
-                    break;
-
-                default:
-                    return _driver ??= new ChromeDriver(GetChromeOptions());
+                    _driver ??= new EdgeDriver(GetEdgeOptions());
                     break;
             };
         }
