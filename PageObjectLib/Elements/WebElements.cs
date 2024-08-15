@@ -72,5 +72,7 @@ namespace PageObjectLib.Elements
 
         public void FrameExit() => Driver.GetDriver().SwitchTo().DefaultContent();
 
+        public bool IsElementDisplayed() => Element.Displayed;
+        public bool IsElementEnabled() => Element.Enabled;
     }
 }
