@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using PageObjectLib.Factories;
+using SeleniumExtras.WaitHelpers;
 
 namespace PageObjectLib.Elements
 {
@@ -72,7 +73,17 @@ namespace PageObjectLib.Elements
 
         public void FrameExit() => Driver.GetDriver().SwitchTo().DefaultContent();
 
-        public bool IsElementDisplayed() => Element.Displayed;
-        public bool IsElementEnabled() => Element.Enabled;
+        public bool IsElementDisplayed(By locator)
+        {
+            try
+            {
+                Driver.GetWaitByTime(TimeSpan.FromSeconds(20)).Until(ExpectedConditions.ElementIsVisible(locator));
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }
