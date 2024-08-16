@@ -42,6 +42,7 @@ namespace PageObjectLib.Factories
             {
                 _chromeOptions = new ChromeOptions();
                 _chromeOptions.AddArgument("start-maximized");
+                _chromeOptions.AddArgument("--disable-notifications");
             }
             return _chromeOptions;
         }
@@ -52,6 +53,7 @@ namespace PageObjectLib.Factories
             {
                 _edgeOptions = new EdgeOptions();
                 _edgeOptions.AddArgument("start-maximized");
+                _edgeOptions.AddArgument("--disable-notifications");
             }
             return _edgeOptions;
         }

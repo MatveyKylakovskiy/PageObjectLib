@@ -73,7 +73,7 @@ namespace PageObjectLib.Elements
 
         public void FrameExit() => Driver.GetDriver().SwitchTo().DefaultContent();
 
-        public bool IsElementDisplayed(By locator)
+        public static bool IsElementDisplayed(By locator)
         {
             try
             {
