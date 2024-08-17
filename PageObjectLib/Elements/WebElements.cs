@@ -32,6 +32,11 @@ namespace PageObjectLib.Elements
             Element.SendKeys(value);
         }
 
+        public void Clear()
+        {
+            Element.Clear();
+        }
+
         public void Click()
         {
             ScrollToElement();
