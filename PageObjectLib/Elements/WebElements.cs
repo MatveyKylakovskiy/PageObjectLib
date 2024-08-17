@@ -19,6 +19,11 @@ namespace PageObjectLib.Elements
             }
         }
 
+        public List<IWebElement> ListOfElements()
+        {
+            WaitWebElementPresent();
+            return Driver.GetDriver().FindElements(_locator).ToList();
+        }
         public void WaitWebElementPresent() => Driver.GetWait().Until(drv => drv.FindElements(_locator).Count() > 0);
 
         public void SendValue(string value)
