@@ -95,5 +95,7 @@ namespace PageObjectLib.Elements
             }
             return true;
         }
+
+        public bool IsElementVisible() => Element.Displayed;
     }
 }
